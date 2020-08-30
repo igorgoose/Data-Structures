@@ -1,7 +1,5 @@
 package by.schepov.tree;
 
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static junit.framework.Assert.assertEquals;
 
