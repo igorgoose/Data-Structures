@@ -3,7 +3,7 @@ package by.schepov.tree;
 public class AVLBinaryTree {
 
     private Node root;
-    private int size;
+    private int size = 0;
 
     private static class Node {
 
@@ -149,6 +149,7 @@ public class AVLBinaryTree {
 
     private Node addKeyInSubtree(Node root, int key) {
         if (root == null) {
+            ++size;
             return new Node(key);
         }
         if (key < root.getKey()) {
@@ -197,6 +198,7 @@ public class AVLBinaryTree {
                 newRight.setParentNode(root);
             }
         } else {
+            --size;
             Node right = root.getRightNode();
             Node left = root.getLeftNode();
             if (right == null) {
