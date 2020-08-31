@@ -2,6 +2,7 @@ package by.schepov.tree;
 
 import org.junit.Test;
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertNull;
 
 
 public class AVLBinaryTreeTest {
@@ -73,4 +74,23 @@ public class AVLBinaryTreeTest {
         tree.removeKey(2);
         assertEquals("6 4 5 7", tree.toString());
     }
+
+    @Test
+    public void findNodeTestTreeHasKey(){
+        AVLBinaryTree tree = new AVLBinaryTree();
+        tree.addKey(2);
+        tree.addKey(3);
+        tree.addKey(0);
+        assertEquals(0, tree.getNode(0).getKey());
+    }
+
+    @Test
+    public void findNodeTestTreeHasntGotKey(){
+        AVLBinaryTree tree = new AVLBinaryTree();
+        tree.addKey(2);
+        tree.addKey(3);
+        tree.addKey(0);
+        assertNull(tree.getNode(5));
+    }
+
 }

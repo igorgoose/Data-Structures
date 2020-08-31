@@ -5,7 +5,7 @@ public class AVLBinaryTree {
     private Node root;
     private int size = 0;
 
-    private static class Node {
+    public static class Node {
 
         private int key;
         private Node leftNode;
@@ -218,6 +218,22 @@ public class AVLBinaryTree {
         root = removeKeyInSubtree(root, key);
     }
 
+    private Node getNodeFromSubtree(Node root, int key) {
+        if (root == null) {
+            return null;
+        }
+        if (root.getKey() == key) {
+            return root;
+        }
+        if (root.getKey() > key) {
+            return getNodeFromSubtree(root.getLeftNode(), key);
+        }
+        return getNodeFromSubtree(root.getRightNode(), key);
+    }
+
+    public Node getNode(int key) {
+        return getNodeFromSubtree(root, key);
+    }
 
     @Override
     public String toString() {
