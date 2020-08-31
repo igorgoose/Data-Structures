@@ -5,7 +5,7 @@ public class BinaryTree {
     private Node root;
     private int size;
 
-    private static class Node {
+    public static class Node {
 
         private int key;
         private Node leftNode;
@@ -24,7 +24,7 @@ public class BinaryTree {
             return key;
         }
 
-        public void setKey(int key) {
+        private void setKey(int key) {
             this.key = key;
         }
 
@@ -32,7 +32,7 @@ public class BinaryTree {
             return leftNode;
         }
 
-        public void setLeftNode(Node leftNode) {
+        private void setLeftNode(Node leftNode) {
             this.leftNode = leftNode;
         }
 
@@ -40,7 +40,7 @@ public class BinaryTree {
             return rightNode;
         }
 
-        public void setRightNode(Node rightNode) {
+        private void setRightNode(Node rightNode) {
             this.rightNode = rightNode;
         }
 
@@ -48,7 +48,7 @@ public class BinaryTree {
             return parentNode;
         }
 
-        public void setParentNode(Node parentNode) {
+        private void setParentNode(Node parentNode) {
             this.parentNode = parentNode;
         }
     }
@@ -65,7 +65,7 @@ public class BinaryTree {
         return size;
     }
 
-    public void addNode(int key) {
+    public void addKey(int key) {
         if(root == null){
             root = new Node(key);
             ++size;
@@ -97,21 +97,21 @@ public class BinaryTree {
 
     }
 
-    public void removeNode(int key) {
-        removeNode(root, key);
+    public void removeKey(int key) {
+        removeKey(root, key);
         --size;
     }
 
-    private void removeNode(Node node, int key) {
+    private void removeKey(Node node, int key) {
         if (node == null) {
             return;
         }
         if (key < node.getKey()) {
-            removeNode(node.getLeftNode(), key);
+            removeKey(node.getLeftNode(), key);
             return;
         }
         if (key > node.getKey()) {
-            removeNode(node.getRightNode(), key);
+            removeKey(node.getRightNode(), key);
             return;
         }
         if (size == 1) {
@@ -141,6 +141,24 @@ public class BinaryTree {
     private Node findMinNodeInSubtree(Node node) {
         return node.getLeftNode() == null ? node : findMinNodeInSubtree(node.getLeftNode());
     }
+
+    private Node getNodeFromSubtree(Node root, int key){
+        if(root == null){
+            return null;
+        }
+        if(root.getKey() == key){
+            return root;
+        }
+        if(root.getKey() > key){
+            return getNodeFromSubtree(root.getLeftNode(), key);
+        }
+        return getNodeFromSubtree(root.getRightNode(), key);
+    }
+
+    public Node getNode(int key){
+        return getNodeFromSubtree(root, key);
+    }
+
 
 
     @Override
